@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--数据库连接配置-->
+    <properties resource="generatorConfig.properties"/>
+
+    <!--组织-->
+    <context id="og" targetRuntime="MyBatis3">
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"/>
+        <!-- <plugin type="org.mybatis.generator.plugins.ToStringPlugin"></plugin> -->
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!--数据库连接配置可在 generatorConfig.properties 文件中进行修改-->
+        <jdbcConnection driverClass="${driver}"
+                        connectionURL="${url}" userId="${username}" password="${password}">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!--TODO targetPackage 实体对象的生成路径-->
+        <javaModelGenerator targetPackage="com.example.demo.module.wechatUser.entity" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!--targetPackage *Mapper.xml的生成路径-->
+        <sqlMapGenerator targetPackage="mapper.org" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!--TODO targetPackage *Mapper.java 文件的生成包路径-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.example.demo.module.wechatUser.mapper"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!--TODO tableName 表名 ，domainObjectName 生成的对象名，默认需要后缀为DO -->
+        <table  tableName="wechat_user" domainObjectName="WechatUser"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false" >
+            <!--<property name="constructorBased" value="true"/>-->
+            <property name="useActualColumnNames" value="false"/>
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
+        </table>
+
+
+    </context>
+
+
+
+</generatorConfiguration>
